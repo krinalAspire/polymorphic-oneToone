@@ -6,6 +6,8 @@ router.get("/image", imageroute.Image);
 
 router.post("/image", imageroute.create);
 
-router.get("/poly", imageroute.polymorphic);
+// router.get("/poly", imageroute.polymorphic);
+
+router.get("/polymany", imageroute.polymorphicmany);
 
 module.exports=router;

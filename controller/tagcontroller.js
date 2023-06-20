@@ -1,10 +1,11 @@
 const Image=require("../models/image");
 const Kid = require("../models/kid");
-const Tag = require("../models/tag");
+const Tag=require("../models/tag");
+const Video = require("../models/video");
 
-exports.Image=async(req,res)=>{
+exports.tag=async(req,res)=>{
     try{
-       const user=await Image.findAll();
+       const user=await Tag.findAll();
        res.send(user);
     }catch(err){
         console.log(err.message);
@@ -14,9 +15,9 @@ exports.Image=async(req,res)=>{
 
 exports.create=async(req,res)=>{
     try{
-        const {title, url}=req.body;
-        const user=await Image.create({
-          title, url
+        const {name}=req.body;
+        const user=await Tag.create({
+          name
         })
         // console.log(user);
         res.send(user);
@@ -89,15 +90,13 @@ exports.create=async(req,res)=>{
 // }
 
 exports.polymorphicmany=async(req,res)=>{
-        try{
-           let data= await Image.findAll({
-            include:[{
-                model:Tag
-            }]
-           });
-           res.send(data);
-        }catch(err){
-            console.log(err.message);
-            res.status(400).json({message: err.message});
-        }
+    try{
+       let data= await Tag.findAll({
+        include:[Video, Image]
+       });
+       res.send(data);
+    }catch(err){
+        console.log(err.message);
+        res.status(400).json({message: err.message});
     }
+}

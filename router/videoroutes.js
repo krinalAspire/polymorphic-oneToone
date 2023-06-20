@@ -6,6 +6,8 @@ router.get("/video", videosroute.videos);
 
 router.post("/video", videosroute.create);
 
-router.get("/poly-video", videosroute.polymorphic);
+// router.get("/poly-video", videosroute.polymorphic);
+
+router.get("/polymany-video", videosroute.polymorphicmany);
 
 module.exports=router;

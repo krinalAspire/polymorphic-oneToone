@@ -1,4 +1,5 @@
 const Kid = require("../models/kid");
+const Tag = require("../models/tag");
 const Video=require("../models/video");
 
 exports.videos=async(req,res)=>{
@@ -78,6 +79,20 @@ exports.polymorphic=async(req,res)=>{
        let data= await Video.findAll({
         include:[{
             model:Kid
+        }]
+       });
+       res.send(data);
+    }catch(err){
+        console.log(err.message);
+        res.status(400).json({message: err.message});
+    }
+}
+
+exports.polymorphicmany=async(req,res)=>{
+    try{
+       let data= await Video.findAll({
+        include:[{
+            model:Tag
         }]
        });
        res.send(data);
